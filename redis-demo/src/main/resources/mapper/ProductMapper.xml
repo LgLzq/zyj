@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cdqf.redisdemo.dao.ProductDao">
+
+    <select id="queryById" resultType="cn.cdqf.redisdemo.pojo.Product" parameterType="int">
+        select * from product where id=#{id}
+    </select>
+    <select id="queryProductsByCid" resultType="cn.cdqf.redisdemo.pojo.Product" parameterType="int">
+        select * from product where cid=#{id}
+    </select>
+    <select id="queryByIds" resultType="cn.cdqf.redisdemo.pojo.Product">
+        select * from product
+        <foreach collection="collection" item="id" open="where id in(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+</mapper>
